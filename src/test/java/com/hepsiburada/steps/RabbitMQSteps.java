@@ -1,11 +1,9 @@
 package com.hepsiburada.steps;
 
-import com.rabbitmq.client.*;
+import com.hepsiburada.client.RabbitMQClient;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertEquals;
 

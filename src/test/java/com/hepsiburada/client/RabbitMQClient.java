@@ -1,4 +1,4 @@
-package com.hepsiburada.steps;
+package com.hepsiburada.client;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
