@@ -9,7 +9,7 @@ import org.junit.Assert;
 
 public class RabbitMQSteps {
     public String writeMessage;
-    public String readMessage;
+    private String readMessage;
     RabbitMQClient rabbitMQClient;
     public RabbitMQSteps(RabbitMQClient rabbitMQClient) {
         this.rabbitMQClient = rabbitMQClient;
@@ -17,17 +17,20 @@ public class RabbitMQSteps {
 
     @Given("^Create new Message \"([^\"]*)\"$")
     public void createNewMessage(String writeMessage) throws Throwable {
+        this.writeMessage=writeMessage;
         rabbitMQClient.publishBrand(writeMessage);
     }
 
     @When("^Reading in created message$")
     public void readingInMessage() throws Exception {
         rabbitMQClient.basicConsume();
+        Thread.sleep(2000);
+        this.readMessage=rabbitMQClient.getReadMessage();
     }
 
     @Then("^Check the message read with the typed message$")
     public void checkTheMessageReadWithTheTypedMessage() throws Exception {
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         Assert.assertEquals(writeMessage,readMessage);
     }
 
