@@ -81,11 +81,11 @@
         </dependency>
 
         <dependency>
-
             <groupId>com.rabbitmq</groupId>
             <artifactId>amqp-client</artifactId>
             <version>5.9.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.hepsiburada</groupId>
             <artifactId>HepsiburadaRabbitMQ</artifactId>

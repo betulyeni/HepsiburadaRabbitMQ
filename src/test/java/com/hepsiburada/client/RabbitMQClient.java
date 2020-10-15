@@ -27,11 +27,18 @@ public class RabbitMQClient {
     public void publishBrand(String writeMessage) throws IOException {
         channel.basicPublish("", QUEUE_NAME, null, writeMessage.getBytes(StandardCharsets.UTF_8));
         System.out.println(" [x] Sent '" + writeMessage + "'");
+
     }
 
-    public void basicConsume() throws IOException {
+    public void basicConsume() throws IOException{
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             readMessage = new String(delivery.getBody(), "UTF-8");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println(" [x] Received '" + readMessage + "'");
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {
