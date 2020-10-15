@@ -1,5 +1,6 @@
 package com.hepsiburada.steps;
 import com.rabbitmq.client.*;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,12 +22,14 @@ public class RabbitMQSteps {
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
     }
-    @Given("^Create new Message$")
-    public void createNewMessage() throws Exception{
+    @Given("^Create new Message \"([^\"]*)\"$")
+    public void createNewMessage(String arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
         setUp();
-        writeMessage = "hello";
+        writeMessage = arg0;
         channel.basicPublish("", QUEUE_NAME, null, writeMessage.getBytes(StandardCharsets.UTF_8));
         System.out.println(" [x] Sent '" + writeMessage + "'");
+        //throw new PendingException();
     }
 
     @When("^Reading in created message$")
