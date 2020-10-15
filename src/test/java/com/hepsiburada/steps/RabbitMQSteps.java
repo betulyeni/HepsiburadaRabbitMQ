@@ -22,22 +22,18 @@ public class RabbitMQSteps {
     public void createNewMessage(String arg0) throws Throwable {
         writeMessage = arg0;
         rabbitMQClient.publishBrand(writeMessage);
-        System.out.println(" [x] Sent '" + writeMessage + "'");
-
     }
 
     @When("^Reading in created message$")
     public void readingInMessage() throws Exception {
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
         rabbitMQClient.basicConsume();
-
     }
 
     @Then("^Check the message read with the typed message$")
     public void checkTheMessageReadWithTheTypedMessage() throws Exception {
         Thread.sleep(10000);
         assertEquals(writeMessage, readMessage);
-
     }
 
 

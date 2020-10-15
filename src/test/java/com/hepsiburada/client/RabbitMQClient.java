@@ -26,6 +26,7 @@ public class RabbitMQClient {
 
     public void publishBrand(String writeMessage) throws IOException {
         channel.basicPublish("", QUEUE_NAME, null, writeMessage.getBytes(StandardCharsets.UTF_8));
+        System.out.println(" [x] Sent '" + writeMessage + "'");
     }
 
     public void basicConsume() throws IOException {
