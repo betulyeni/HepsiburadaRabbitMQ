@@ -1,9 +1,8 @@
-Feature: RabbitMQ Message
-  Scenario: Sending and Reading in Message
-    Given Create new Message "Write message here"
-    When  Reading in created message
-    Then Check the message read with the typed message
-
+Feature: RabbitMQ Publish Subscribe Mechanism
+  Scenario: Successful Message Publish and Receive
+    Given I send the message "Write message here"
+    When  I consume the queue
+    Then I expect the sent and received message are same
 
 
 

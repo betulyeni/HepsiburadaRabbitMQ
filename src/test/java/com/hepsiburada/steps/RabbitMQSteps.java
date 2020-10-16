@@ -18,20 +18,20 @@ public class RabbitMQSteps {
     }
 
 
-    @Given("^Create new Message \"([^\"]*)\"$")
+    @Given("^I send the message \"([^\"]*)\"$")
     public void createNewMessage(String writeMessage) throws Throwable {
         this.writeMessage=writeMessage;
-        rabbitMQClient.publishBrand(writeMessage);
+        rabbitMQClient.publishBasic(writeMessage);
     }
 
-    @When("^Reading in created message$")
+    @When("^I consume the queue$")
     public void readingInMessage() throws IOException,InterruptedException {
         rabbitMQClient.basicConsume();
         Thread.sleep(2000);
         this.readMessage=rabbitMQClient.getReadMessage();
     }
 
-    @Then("^Check the message read with the typed message$")
+    @Then("^I expect the sent and received message are same$")
     public void checkTheMessageReadWithTheTypedMessage() {
         Assert.assertEquals(writeMessage,readMessage);
     }
