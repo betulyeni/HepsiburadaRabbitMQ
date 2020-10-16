@@ -24,7 +24,7 @@ public class RabbitMQSteps {
         rabbitMQClient.publishBasic(writeMessage);
     }
 
-    @When("^I consume the queue$")
+    @When("^I consume the Test queue$")
     public void readingInMessage() throws IOException,InterruptedException {
         rabbitMQClient.basicConsume();
         Thread.sleep(2000);
