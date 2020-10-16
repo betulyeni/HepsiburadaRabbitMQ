@@ -10,10 +10,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class RabbitMQClient {
-    public final static String QUEUE_NAME = "hello";
-    public Channel channel;
-    public Connection connection;
-    private String readMessage;
+    private final static String QUEUE_NAME = "hello";
+    private final Channel channel;
+    private final Connection connection;
+    private  String readMessage;
 
     public RabbitMQClient() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
