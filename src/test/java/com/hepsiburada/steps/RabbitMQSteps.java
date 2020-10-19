@@ -11,7 +11,9 @@ import java.io.IOException;
 
 public class RabbitMQSteps {
     private String writeMessage;
-    private String readMessage;
+    private String queue_readMessage1;
+    private String queue_readMessage2;
+    private String queue_readMessage3;
     RabbitMQClient rabbitMQClient;
     public RabbitMQSteps(RabbitMQClient rabbitMQClient) {
         this.rabbitMQClient = rabbitMQClient;
@@ -24,16 +26,33 @@ public class RabbitMQSteps {
         rabbitMQClient.publishBasic(writeMessage);
     }
 
-    @When("^I consume the Test queue$")
-    public void readingInMessage() throws IOException,InterruptedException {
-        rabbitMQClient.basicConsume();
+    @When("^I consume the Test_One queue queue$")
+    public void iConsumeTheTest_OneQueueQueue() throws  IOException,InterruptedException{
+        rabbitMQClient.basicConsume_One();
         Thread.sleep(2000);
-        this.readMessage=rabbitMQClient.getReadMessage();
+        this.queue_readMessage1 =rabbitMQClient.getQueue_readMessage1();
     }
+
+    @When("^I consume the Test_Two queue queue$")
+    public void iConsumeTheTest_TwoQueueQueue() throws  IOException,InterruptedException{
+        rabbitMQClient.basicConsume_Two();
+        Thread.sleep(2000);
+        this.queue_readMessage2 =rabbitMQClient.getQueue_readMessage2();
+    }
+
+    @When("^I consume the Test_Three queue queue$")
+    public void iConsumeTheTest_ThreeQueueQueue() throws  IOException,InterruptedException {
+        rabbitMQClient.basicConsume_Three();
+        Thread.sleep(2000);
+        this.queue_readMessage3 =rabbitMQClient.getQueue_readMessage3();
+    }
+
 
     @Then("^I expect the sent and received message are same$")
     public void checkTheMessageReadWithTheTypedMessage() {
-        Assert.assertEquals(writeMessage,readMessage);
+        Assert.assertEquals(writeMessage, queue_readMessage1);
+        Assert.assertEquals(writeMessage, queue_readMessage2);
+        Assert.assertEquals(writeMessage, queue_readMessage3);
     }
 
 
